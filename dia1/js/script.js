@@ -33,3 +33,4 @@ function salonfavorito(){
     //console.log(a+b)
     return "P1";
 }
+

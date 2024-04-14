@@ -1,0 +1,15 @@
+.atras {
+    position: absolute;
+    top: 400px;
+    left: 10px;
+    width: px;
+    height: auto;
+}
+
+.atras a {
+    text-decoration: none;
+    background-color: #f0f0f0;
+    color: #000000;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}

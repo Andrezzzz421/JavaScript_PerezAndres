@@ -1,8 +1,8 @@
 let campers = [];
-let modoActualizar = false; // Variable para controlar el modo del formulario
+let modoActualizar = false; 
 
 document.getElementById("registercamperForm").addEventListener("submit", function(event) {
-    event.preventDefault(); // Prevenir el envío por defecto
+    event.preventDefault(); 
 
     const camperData = {
         N_documento: document.getElementById("documento").value,
@@ -25,12 +25,12 @@ document.getElementById("registercamperForm").addEventListener("submit", functio
         if (index !== -1) {
             campers[index] = {...campers[index], ...camperData};
         }
-        modoActualizar = false; // Resetear el modo
-        document.getElementById("submitBtn").value = "Agregar Camper"; // Cambiar texto del botón
+        modoActualizar = false; 
+        document.getElementById("submitBtn").value = "Agregar Camper"; 
     } else {
         let ultimoId = campers.length > 0 ? Math.max(...campers.map(camper => camper.ID)) : 0;
         let nuevoId = ultimoId + 1;
-        campers.push({...camperData, ID: nuevoId}); // Agregar ID y añadir al array
+        campers.push({...camperData, ID: nuevoId}); 
     }
 
     mostrarCampers();
@@ -38,7 +38,7 @@ document.getElementById("registercamperForm").addEventListener("submit", functio
 
 function mostrarCampers() {
     let campersContainer = document.getElementById("campersContainer");
-    campersContainer.innerHTML = ""; // Limpiar contenido anterior
+    campersContainer.innerHTML = ""; 
 
     campers.forEach(camper => {
         let camperDiv = document.createElement("div");
@@ -54,6 +54,7 @@ function mostrarCampers() {
             <p>Estado: ${camper.Estado}</p>
             <p>Riesgo: ${camper.Riesgo}</p>
             <button onclick="editarCamper(${camper.ID})">Editar</button>
+            <button onclick="eliminarCamper(${camper.ID})">Eliminar</button>
             <hr>
         `;
         campersContainer.appendChild(camperDiv);
@@ -75,33 +76,43 @@ function editarCamper(ID) {
         document.getElementById("fijo").value = camper.N_fijo;
         document.getElementById("updateId").value = camper.ID;
         document.getElementById("submitBtn").value = "Actualizar Camper";
-        modoActualizar = true; // Cambiar modo a actualizar
+        modoActualizar = true; 
     }
 }
 
-document.getElementById("registroCamperForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-
-});
+function eliminarCamper(ID) {
+    const index = campers.findIndex(camper => camper.ID === ID);
+    if (index !== -1) {
+        campers.splice(index, 1);mostrarCampers();
+    }
+}
 
 document.getElementById("pruebaInicialForm").addEventListener("submit", function(event) {
     event.preventDefault();
 
-    const ID_camper = parseInt(document.getElementById("idCamper").value);
-    const nota_practica = parseInt(document.getElementById("notaPractica").value);
-    const nota_teorica = parseInt(document.getElementById("notaTeorica").value);
+    let ID_camper = parseInt(document.getElementById("idCamper").value, 10);
 
-    if (isNaN(ID_camper) || isNaN(nota_practica) || isNaN(nota_teorica)) {
-        alert("Por favor, ingresa valores numéricos válidos.");
-        return;
+    for (let i = 0; i < campers.length; i++) {
+        if (campers[i].ID === ID_camper) {
+            let nota_practica = parseInt(document.getElementById("notaPractica").value);
+
+            while (isNaN(nota_practica) || nota_practica < 0 || nota_practica > 100) {
+                nota_practica = parseInt(prompt("Please enter a valid score between 0 and 100: "));
+            }
+
+            let nota_teorica = parseInt(document.getElementById("notaTeorica").value);
+
+            while (isNaN(nota_teorica) || nota_teorica < 0 || nota_teorica > 100) {
+                nota_teorica = parseInt(prompt("Please enter a valid score between 0 and 100: "));
+            }
+
+            let nota_ingreso = (nota_practica + nota_teorica) / 2;
+
+            campers[i].Estado = nota_ingreso >= 60 ? "Aprobado" : "Reprobado"; 
+
+            break;
+        }
     }
 
-    const nota_ingreso = (nota_practica + nota_teorica) / 2; // Corrección en la fórmula
-    const camperIndex = campers.findIndex(camper => camper.ID === ID_camper);
-    if (camperIndex !== -1) {
-        campers[camperIndex].Estado = nota_ingreso >= 60 ? "Aprobado" : "Reprobado";
-        mostrarCampers(); // Actualizar la visualización de los campers
-    } else {
-        alert("No se encontró un Camper con ese ID.");
-    }
+    mostrarCampers();
 });

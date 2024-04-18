@@ -32,4 +32,4 @@ function crearVehiculo() {
 }
 
 var Vehiculito = crearVehiculo();
-console.log(Vehiculo);
+console.log(Vehiculito);

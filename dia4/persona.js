@@ -28,5 +28,5 @@ function crearPersona() {
   }
   
   var Personita= crearPersona();
-  console.log(Persona);
+  console.log(personita);
   

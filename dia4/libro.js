@@ -12,4 +12,4 @@ function crearLibro() {
 }
 
 var Librito = crearLibro();
-console.log(Libro);
+console.log(Librito);

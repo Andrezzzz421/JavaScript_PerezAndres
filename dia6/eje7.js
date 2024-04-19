@@ -35,4 +35,3 @@ class Student {
     const studentType = student instanceof NSStudent ? "NS Student" : "Regular Student";
     console.log(`Estudiante ${index + 1} (${studentType}): ${student.pass() ? "Aprobado" : "No aprobado"}`);
   });
-  

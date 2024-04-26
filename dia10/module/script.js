@@ -39,7 +39,6 @@
         dataInfo += createTableRow('Homeworld', data.homeworld);
         dataInfo += '</table>';
 
-        // Fetching and displaying Homeworld Information
         fetch(data.homeworld)
             .then(response => response.json())
             .then(homeworldData => {
@@ -56,7 +55,6 @@
                 dataInfo += createTableRow('Population', homeworldData.population);
                 dataInfo += '</table>';
 
-                // Fetching and displaying Species Information
                 fetch(data.species)
                     .then(response => response.json())
                     .then(speciesData => {
@@ -72,24 +70,23 @@
                         dataInfo += createTableRow('Average Lifespan', speciesData.average_lifespan);
                         dataInfo += createTableRow('Homeworld', speciesData.homeworld);
                         dataInfo += createTableRow('Language', speciesData.language);
-                        if (speciesData.people) {
-                            dataInfo += '<tr><td colspan="2"><strong>People</strong></td></tr>';
-                            speciesData.people.forEach(people => {
-                                dataInfo += '<tr><td colspan="2">' + people + '</td></tr>';
-                            });
-                        }
-                        if (speciesData.films.length) {
-                            dataInfo += '<tr><td colspan="2"><strong>Films</strong></td></tr>';
-                            speciesData.films.forEach(film => {
-                                dataInfo += '<tr><td colspan="2">' + film + '</td></tr>';
-                            });
-                        }
+                        // if (speciesData.people) {
+                        //     dataInfo += '<tr><td colspan="2"><strong>People</strong></td></tr>';
+                        //     speciesData.people.forEach(people => {
+                        //         dataInfo += '<tr><td colspan="2">' + people + '</td></tr>';
+                        //     });
+                        // }
+                        // if (speciesData.films.length) {
+                        //     dataInfo += '<tr><td colspan="2"><strong>Films</strong></td></tr>';
+                        //     speciesData.films.forEach(film => {
+                        //         dataInfo += '<tr><td colspan="2">' + film + '</td></tr>';
+                        //     });
+                        // }
                         dataInfo += createTableRow('Created', speciesData.created);
                         dataInfo += createTableRow('Edited', speciesData.edited);
                         dataInfo += createTableRow('URL', speciesData.url);
                         dataInfo += '</table>';
 
-                        // Fetching and displaying Films Information
                         Promise.all(data.films.map(filmLink => fetch(filmLink).then(response => response.json())))
                             .then(filmsData => {
                                 dataInfo += '<table>';
@@ -101,25 +98,24 @@
                                     dataInfo += createTableRow('Opening Crawl', filmData.opening_crawl);
                                     dataInfo += createTableRow('Director', filmData.director);
                                     dataInfo += createTableRow('Producer', filmData.producer);
-                                    if (filmData.characters) {
-                                        dataInfo += '<tr><td colspan="2"><strong>Characters</strong></td></tr>';
-                                        filmData.characters.forEach(character => {
-                                            dataInfo += '<tr><td colspan="2">' + character + '</td></tr>';
-                                        });
-                                    }
-                                    if (filmData.planets) {
-                                        dataInfo += '<tr><td colspan="2"><strong>Planets</strong></td></tr>';
-                                        filmData.planets.forEach(planet => {
-                                            dataInfo += '<tr><td colspan="2">' + planet + '</td></tr>';
-                                        });
-                                    }
+                                    // if (filmData.characters) {
+                                    //     dataInfo += '<tr><td colspan="2"><strong>Characters</strong></td></tr>';
+                                    //     filmData.characters.forEach(character => {
+                                    //         dataInfo += '<tr><td colspan="2">' + character + '</td></tr>';
+                                    //     });
+                                    // }
+                                    // if (filmData.planets) {
+                                    //     dataInfo += '<tr><td colspan="2"><strong>Planets</strong></td></tr>';
+                                    //     filmData.planets.forEach(planet => {
+                                    //         dataInfo += '<tr><td colspan="2">' + planet + '</td></tr>';
+                                    //     });
+                                    // }
                                     dataInfo += createTableRow('Created', filmData.created);
                                     dataInfo += createTableRow('Edited', filmData.edited);
                                     dataInfo += createTableRow('URL', filmData.url);
                                 });
                                 dataInfo += '</table>';
 
-                                // Fetching and displaying Vehicles Information
                                 Promise.all(data.vehicles.map(vehicleLink => fetch(vehicleLink).then(response => response.json())))
                                     .then(vehiclesData => {
                                         dataInfo += '<table>';
@@ -154,7 +150,6 @@
                                         });
                                         dataInfo += '</table>';
 
-                                        // Fetching and displaying Starships Information
                                         Promise.all(data.starships.map(starshipLink => fetch(starshipLink).then(response => response.json())))
                                             .then(starshipsData => {
                                                 dataInfo += '<table>';
@@ -191,7 +186,6 @@
                                                 });
                                                 dataInfo += '</table>';
                                                 
-                                                // Displaying all information
                                                 document.getElementById('personstar').innerHTML = dataInfo;
                                             });
                                     });

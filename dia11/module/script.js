@@ -37,7 +37,12 @@ class PokemonSearcher {
             this.pokeImage.style.display = 'block';
             this.pokeName.textContent = data.name;
             this.pokeNumber.textContent = data.id;
-            this.pokeImage.src = data.sprites.versions['generation-v']['black-white'].animated.front_default;
+            const sprites = data.sprites.versions['generation-v']['black-white'].animated;
+            if (sprites && sprites.front_default) {
+                this.pokeImage.src = sprites.front_default;
+            } else {
+                this.pokeImage.src = data.sprites.front_default;
+            }
             this.input.value = '';
             this.currentPokemon = data.id;
         } else {

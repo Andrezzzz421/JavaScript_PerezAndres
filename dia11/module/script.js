@@ -37,12 +37,23 @@ class PokemonSearcher {
             this.pokeImage.style.display = 'block';
             this.pokeName.textContent = data.name;
             this.pokeNumber.textContent = data.id;
-            const sprites = data.sprites.versions['generation-v']['black-white'].animated;
-            if (sprites && sprites.front_default) {
-                this.pokeImage.src = sprites.front_default;
+            
+            // Verificar si la propiedad 'sprites' está presente en los datos
+            if (data.sprites) {
+                // Verificar si la propiedad 'other' y 'showdown' están presentes en los datos
+                if (data.sprites.other && data.sprites.other.showdown && data.sprites.other.showdown.front_default) {
+                    // Asignar la imagen al src del elemento img
+                    this.pokeImage.src = data.sprites.other.showdown.front_default;
+                } else if (data.sprites.front_default) {
+                    // Si no se encuentra la imagen 'other' y 'showdown', usar la imagen por defecto
+                    this.pokeImage.src = data.sprites.front_default;
+                }
             } else {
-                this.pokeImage.src = data.sprites.front_default;
+                // Si no se encuentran sprites, mostrar un mensaje de error
+                this.pokeImage.src = ''; // Limpiar la imagen
+                this.pokeImage.alt = 'Image not found';
             }
+            
             this.input.value = '';
             this.currentPokemon = data.id;
         } else {

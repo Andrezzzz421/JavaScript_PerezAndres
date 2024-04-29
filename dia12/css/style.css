@@ -1,0 +1,94 @@
+body {
+    background-image: url('https://st2.depositphotos.com/19270688/48245/v/600/depositphotos_482455298-stock-video-dark-blue-background-with-loopable.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+}
+
+h1 {
+    color: white;
+    text-align: center;
+}
+
+.form {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    left: 710px;
+    gap: 2%;
+}
+
+.inc {
+    width: 200px;
+    padding: 8px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    outline: none;
+}
+
+.inc::placeholder {
+    color: #999;
+}
+
+.inc2 {
+    width: 200px;
+    padding: 8px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    outline: none;
+}
+
+.inc2::placeholder {
+    color: #999;
+}
+    
+.botones {
+    position: absolute;
+    top: 52%;
+    left: 82%;
+    width: 65%;
+    transform: translate(-57%, 0);
+    display: flex;
+    gap: 20px;
+}
+
+button {
+    height: 5vh;
+    width: 5vw;
+    border-radius: 5px;
+    font-weight: 50;
+    color: white;
+    background-color: #3B4E4C;
+    box-shadow: -2px 3px 0 #1E2019, -4px 6px 0 #000;
+}
+
+button:active {
+    box-shadow: inset -4px 4px 0 #222;
+    font-size: 0.9rem;
+}
+
+.cosita{
+    position: absolute;
+    top: 45%;
+}
+
+.alert{
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+

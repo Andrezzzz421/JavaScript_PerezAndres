@@ -3,17 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./storage/icon.png" type="image/x-icon">
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="shortcut icon" href="./storage/icon.png">
-    <title>pokemon pokedex</title>
+    <title>pokedex</title>
 </head>
 <body>
-    <h1>tumama</h1>
-    <main>
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/132.gif" class="poke_
-        gif">
-        <img class="poke" src="./storage/pokedex.png">
-    </main>
+<main>
+    <img src="./storage/pokedex.png"class="poke">
+    <img src="" class="pokeimagen">
+    <h1 class="pokedata">
+        <span class="pokenumber"></span>-
+        <span class="pokename"></span>
+    </h1>
+    <form class="form">
+        <input type="search" class="buscador" placeholder="Name or Number" required>
+    </form>
+    <div class="botones">
+        <button class="buttonprev">prev <</button>
+        <button class="buttonnext">next ></button>
+    </div>
+</main>
 </body>
-<script src="./module/script.js"></script>
+    <script src="./module/script.js" defer></script>
 </html>

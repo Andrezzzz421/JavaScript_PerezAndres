@@ -6,16 +6,27 @@ class CartaSearch {
         this.buttonYes = document.querySelector('.buttonSI');
         this.buttonNo = document.querySelector('.buttonNO');
         this.alertText = document.querySelector('.alert');
+        this.buttonObtener = document.querySelector('.buttonObtener');
+        this.buttonObtener.addEventListener('click', this.obtenerNuevaCarta.bind(this));
 
-        // this.cartaImage.src = '../dia12/storage/imagenvolteada.png';
+        this.mostrarCartaDefault();
 
         this.cartas = [];
 
         this.init();
     }
 
+    mostrarCartaDefault() {
+        const defaultImagen = './storage/voltea.png';
+        this.mostrarCarta(defaultImagen);
+    }
+
+
     init() {
-        this.buttonYes.addEventListener('click', this.verificarCarta.bind(this, true));
+        this.buttonYes.style.display = 'none';
+        this.buttonNo.style.display = 'none';
+    
+        this.buttonYes.addEventListener('click', this.mostrarAgradecimiento.bind(this));
         this.buttonNo.addEventListener('click', this.verificarCarta.bind(this, false));
     }
 
@@ -23,28 +34,20 @@ class CartaSearch {
         const numero = this.inputNumber.value.trim();
         const tipo = this.inputType.value.trim();
         
-        if (numero !== '' && tipo !== '') {
-            const carta = `${numero}${tipo.toUpperCase()}`;
-            this.cartas.push(carta);
-
-            if (esCarta) {
-                this.mostrarCarta(carta);
-                this.alertText.textContent = '¿Es esta tu carta?';
-            } else {
-                this.obtenerNuevaCarta();
-            }
-        } else {
-            this.alertText.textContent = 'Por favor, ingresa el número y el tipo de la carta.';
-        }
+    if (esCarta) {
+        this.mostrarAgradecimiento();
+    } else {
+        this.obtenerNuevaCarta();
+        // Mostrar los botones después de obtener una nueva carta
+        this.buttonYes.style.display = 'inline-block';
+        this.buttonNo.style.display = 'inline-block';
     }
+}
 
-    obtenerNuevaCarta() {
-        // Hacer la solicitud a la API para obtener una nueva carta
-        // Supongamos que tu API está en la URL 'https://deckofcardsapi.com/api/deck/new/draw/?count=1'
+ obtenerNuevaCarta() {
         fetch('https://deckofcardsapi.com/api/deck/new/draw/?count=1')
             .then(response => response.json())
             .then(data => {
-                // Verificar si se recibió una carta válida
                 if (data.cards.length > 0) {
                     const nuevaCarta = data.cards[0].image;
                     this.mostrarCarta(nuevaCarta);

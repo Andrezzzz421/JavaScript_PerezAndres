@@ -21,30 +21,27 @@ class CartaSearch {
         this.mostrarCarta(defaultImagen);
     }
 
-
     init() {
-        this.buttonYes.style.display = 'none';
-        this.buttonNo.style.display = 'none';
-    
+        this.ocultarBotones();
         this.buttonYes.addEventListener('click', this.mostrarAgradecimiento.bind(this));
         this.buttonNo.addEventListener('click', this.verificarCarta.bind(this, false));
     }
 
-    verificarCarta(esCarta) {
-        const numero = this.inputNumber.value.trim();
-        const tipo = this.inputType.value.trim();
-        
-    if (esCarta) {
-        this.mostrarAgradecimiento();
-    } else {
-        this.obtenerNuevaCarta();
-        // Mostrar los botones después de obtener una nueva carta
-        this.buttonYes.style.display = 'inline-block';
-        this.buttonNo.style.display = 'inline-block';
+    ocultarBotones() {
+        this.buttonYes.style.display = 'none';
+        this.buttonNo.style.display = 'none';
+        this.buttonObtener.style.display = 'inline-block';
     }
-}
 
- obtenerNuevaCarta() {
+    verificarCarta(esCarta) {
+        if (esCarta) {
+            this.mostrarAgradecimiento();
+        } else {
+            this.obtenerNuevaCarta();
+        }
+    }
+
+    obtenerNuevaCarta() {
         fetch('https://deckofcardsapi.com/api/deck/new/draw/?count=1')
             .then(response => response.json())
             .then(data => {
@@ -52,6 +49,9 @@ class CartaSearch {
                     const nuevaCarta = data.cards[0].image;
                     this.mostrarCarta(nuevaCarta);
                     this.alertText.textContent = '¿Qué tal esta carta?';
+                    this.buttonYes.style.display = 'inline-block';
+                    this.buttonNo.style.display = 'inline-block';
+                    this.buttonObtener.style.display = 'none';
                 } else {
                     throw new Error('No se recibió ninguna carta válida.');
                 }
@@ -64,6 +64,16 @@ class CartaSearch {
 
     mostrarCarta(imagen) {
         this.cartaImage.src = imagen;
+    }
+
+    mostrarAgradecimiento() {
+        this.alertText.textContent = 'Gracias por jugar.';
+        // Reiniciar el juego después de mostrar el mensaje de agradecimiento
+        setTimeout(() => {
+            this.alertText.textContent = '';
+            this.ocultarBotones();
+            this.mostrarCartaDefault();
+        }, 2000); // Espera 2 segundos antes de reiniciar el juego
     }
 }
 

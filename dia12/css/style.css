@@ -69,12 +69,12 @@ button:active {
 
 .buttonSI{
     position: absolute;
-    display: none;
+
     left:3%;
 }
 .buttonNO {
     position: absolute;
-    display: none;
+
     left: 15%;
 }
 
@@ -86,8 +86,8 @@ button:active {
 
 .cosita{
     position: absolute;
-    top: 73%;
-    left: 46%;
+    top: 60%;
+    left: 45%;
 }
 
 .alert{

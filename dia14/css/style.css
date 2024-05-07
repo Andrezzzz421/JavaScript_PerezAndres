@@ -1,9 +1,4 @@
-#registroTrajes {
-    display: none; /* Ocultar el registro de trajes por defecto */
-}
-#funcion{
-    display: none;
-}
+
 #trajesContainer{
     padding-left: 6%;
 }

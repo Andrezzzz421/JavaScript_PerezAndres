@@ -11,6 +11,7 @@
             Poster: document.getElementById("inputPoster").value,
             Date: document.getElementById("dateAppears").value,
             Productora: document.getElementById("category").value,
+            traje: document.getElementById("formGroupExampleInput").value,
         };
 
         Heroes.push(HeroesData);
@@ -22,13 +23,13 @@
     function mostrarHeroes() {
         let heroesContainer = document.getElementById("heroesContainer");
         heroesContainer.innerHTML = "";
-
+    
         Heroes.forEach(function(hero) {
             let heroDiv = document.createElement("div");
             heroDiv.classList.add("card", "mb-3");
             heroDiv.innerHTML = `
                 <div class="card-body">
-                    <h5 class="card-title">ID: ${hero.Id}</h5> <!-- Mostrar el ID -->
+                    <h5 class="card-title">ID: ${hero.Id}</h5>
                     <h5 class="card-title">${hero.Name}</h5>
                     <p class="card-text">Actor: ${hero.Actor}</p>
                     <p class="card-text">Edad Actor: ${hero.Address}</p>
@@ -36,6 +37,8 @@
                     <p class="card-text">Fecha: ${hero.Date}</p>
                     <p class="card-text">Productora: ${hero.Productora === "1" ? "Marvel" : "Dcomics"}</p>
                     <p class="card-text">Poster: ${hero.Poster}</p>
+                    <p class="card-text">Traje: ${hero.traje}</p>
+                    <button type="button" class="btn btn-primary" onclick="cargarHeroe(${hero.Id})">Editar</button>
                 </div>
             `;
             heroesContainer.appendChild(heroDiv);
@@ -76,11 +79,84 @@
             </div>`
         ;
         trajesContainer.appendChild(nuevoTraje);
-        nuevoTraje.style.display = "block"; // Mostrar el nuevo traje
-
-        // Agregar event listener al botón "-" para eliminar el traje
+        nuevoTraje.style.display = "block"; 
         var btnEliminarTraje = nuevoTraje.querySelector(".btnEliminarTraje");
         btnEliminarTraje.addEventListener("click", function() {
             trajesContainer.removeChild(nuevoTraje);
         });
     });
+
+    function cargarHeroe(id) {
+        const heroe = Heroes.find(h => h.Id === id);
+        if (heroe) {
+            document.getElementById("inputName").value = heroe.Name;
+            document.getElementById("inputActor").value = heroe.Actor;
+            document.getElementById("inputAddress").value = heroe.Address;
+            document.getElementById("inputUbicacion").value = heroe.Ubicacion;
+            document.getElementById("inputPoster").value = heroe.Poster;
+            document.getElementById("dateAppears").value = heroe.Date;
+            document.getElementById("category").value = heroe.Productora;
+    
+            document.getElementById("hiddenId").value = heroe.Id;
+        }
+    }
+    
+    function cargarHeroe(id) {
+        const heroe = Heroes.find(h => h.Id === id);
+        if (heroe) {
+            document.getElementById("inputName").value = heroe.Name;
+            document.getElementById("inputActor").value = heroe.Actor;
+            document.getElementById("inputAddress").value = heroe.Address;
+            document.getElementById("inputUbicacion").value = heroe.Ubicacion;
+            document.getElementById("inputPoster").value = heroe.Poster;
+            document.getElementById("dateAppears").value = heroe.Date;
+            document.getElementById("category").value = heroe.Productora;
+    
+
+            document.getElementById("hiddenId").value = heroe.Id;
+        }
+    }
+
+    function actualizarHeroe() {
+        const id = document.getElementById("hiddenId").value;
+        const heroe = Heroes.find(h => h.Id == id);
+        if (heroe) {
+            heroe.Name = document.getElementById("inputName").value;
+            heroe.Actor = document.getElementById("inputActor").value;
+            heroe.Address = document.getElementById("inputAddress").value;
+            heroe.Ubicacion = document.getElementById("inputUbicacion").value;
+            heroe.Poster = document.getElementById("inputPoster").value;
+            heroe.Date = document.getElementById("dateAppears").value;
+            heroe.Productora = document.getElementById("category").value;
+    
+            mostrarHeroes();
+        }
+    }
+    function eliminarHeroe() {
+        const id = document.getElementById("hiddenId").value; // Obtiene el ID desde un campo oculto
+        const index = Heroes.findIndex(h => h.Id == id); // Encuentra el índice del héroe en el arreglo
+        if (index !== -1) {
+            Heroes.splice(index, 1); // Elimina el héroe del arreglo
+            mostrarHeroes(); // Actualiza la lista de héroes mostrada
+        } else {
+            alert("Heroe no encontrado");
+        }
+    }
+
+    function cancelarEdicion() {
+        document.getElementById("inputName").value = "";
+        document.getElementById("inputActor").value = "";
+        document.getElementById("inputAddress").value = "";
+        document.getElementById("inputUbicacion").value = "";
+        document.getElementById("inputPoster").value = "";
+        document.getElementById("dateAppears").value = "";
+        document.getElementById("category").value = "1"; 
+        document.getElementById("hiddenId").value = ""; 
+    
+        document.getElementById("registroTrajes").style.display = "none";
+    
+        document.querySelectorAll('input, select').forEach(function(el) {
+            el.disabled = true;
+        });
+    }
+

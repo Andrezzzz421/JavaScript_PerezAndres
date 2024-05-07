@@ -103,13 +103,12 @@
                                 <h1>Heroeslist</h1>
                                 <div id="heroesContainer"></div>
                             </div>
+                            <input type="hidden" id="hiddenId">
                             <button type="button" class="btn btn-dark" id="btn_new" onclick="">Nuevo héroe</button>
-                            <button type="button" class="btn btn-primary" id="btn_safe" onclick="">Guardar
-                                Héroe</button>
-                            <button type="button" class="btn btn-warning" id="btn_update" onclick="">Actualizar</button>
-                            <button type="button" class="btn btn-info"
-                                onclick="eliminarheroe('Nombre del héroe a eliminar')">Eliminar</button>
-                            <button type="button" class="btn btn-danger" id="btn_cancel" onclick="">Cancelar</button>
+                            <button type="button" class="btn btn-primary" id="btn_safe" onclick="">Guardar Héroe</button>
+                            <button type="button" class="btn btn-warning" id="btn_update" onclick="actualizarHeroe()">Actualizar</button>
+                            <button type="button" class="btn btn-info" onclick="eliminarHeroe()">Eliminar</button>
+                            <button type="button" class="btn btn-danger" id="btn_cancel" onclick="cancelarEdicion()">Cancelar</button>
                         </div>
                     </div>
                 </div>
